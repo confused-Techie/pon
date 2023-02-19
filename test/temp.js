@@ -5,5 +5,6 @@ const path = require("path");
   const obj = await pon.read(path.resolve("./test/fixtures/temp.pon"));
 
   console.log(obj);
+  console.log(obj.core.value);
 
 })();

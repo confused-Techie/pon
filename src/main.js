@@ -12,11 +12,16 @@ async function read(loc) {
 
   let parser = new Parser(file);
 
-  await parser.parse();
+  let err = await parser.parse();
 
   console.log(parser.propertyTypes);
-  
-  const obj = parser.out;
+  console.log(parser.looseTree);
+
+  if (typeof err !== "undefined") {
+    return err;
+  }
+
+  const obj = parser.tree;
 
   return obj;
 }
