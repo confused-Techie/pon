@@ -72,7 +72,7 @@ function parseComment(input, tokenList, index, settings) {
     tokenList[index + 7] === tokenTypes.QUESTION_MARK &&
     tokenList[index + 8] === tokenTypes.GREATER_THAN
   ) {
-    value = parseString(input.slice(token.loc.start.offset + 1, token.loc.end.offset -1));
+    value = parseString(input.slice(tokenList[index+4].loc.start.offset + 1, tokenList[index+4].loc.end.offset -1));
   } else {
     return null;
   }
@@ -88,22 +88,22 @@ function parseComment(input, tokenList, index, settings) {
 
   return {
     value: comment,
-    index: index + 1
+    index: index + 9
   };
 }
 
 function parseDefinition(input, tokenList, index, settings) {
   // definition: TYPE_DEFINITION -> STRING -> TYPE_ASSIGNMENT -> TYPE_X
-  let type = null;
+  let kind = null;
   let key = null;
 
   if (
-    tokenList[index] === tokenTypes.TYPE_DEFINITION &&
-    tokenList[index + 1] === tokenTypes.STRING &&
-    tokenList[index + 2] === tokenTypes.TYPE_ASSIGNMENT
+    tokenList[index].type === tokenTypes.TYPE_DEFINITION &&
+    tokenList[index + 1].type === tokenTypes.STRING &&
+    tokenList[index + 2].type === tokenTypes.TYPE_ASSIGNMENT
   ) {
-    key = tokenList[index + 1];
-    type = tokenList[index + 3];
+    key = tokenList[index + 1].value;
+    kind = tokenList[index + 3].value;
   } else {
     return null;
   }
@@ -111,35 +111,17 @@ function parseDefinition(input, tokenList, index, settings) {
   const definition = {
     type: 'Definition',
     key,
-    type,
+    kind,
     //raw: token.value
   };
 
   return {
     value: definition,
-    index: index + 1
+    index: index + 4
   };
 }
 
-function parseValue(input, tokenList, index, settings) {
-  // value: literal | object | comment | definition
-  const token = tokenList[index];
-
-  const value = (
-    parseLiteral(...arguments) ||
-    parseObject(...arguments) ||
-    parseComment(...arguments) ||
-    parseDefinition(...arguments)
-  );
-
-  if (value) {
-    return value;
-  } else {
-    throw new Error(`Something bad happened! Appease the god Pulsy`);
-  }
-}
-
-function parse(input, settings) {
+function parser(input, settings) {
   settings = Object.assign({}, defaultSettings, settings);
 
   const tokenList = tokenize(input, settings);
@@ -148,19 +130,28 @@ function parse(input, settings) {
     throw new Error(`Unable to parse: ${settings.source}`);
   }
 
+  let parsed = [];
+  let index = 0;
   console.log(tokenList);
+  while (index < tokenList.length) {
+    console.log(`While Calling with: ${index} - ${tokenList[index].type}`);
+    const value = (
+      parseLiteral(input, tokenList, index, settings) ||
+      parseObject(input, tokenList, index, settings) ||
+      parseComment(input, tokenList, index, settings) ||
+      parseDefinition(input, tokenList, index, settings)
+    );
 
-  const value = parseValue(input, tokenList, 0, settings);
-
-  console.log(value);
-  
-  if (value.index === tokenList.length) {
-    return value.value;
-  } else {
-    const token = tokenList[value.index];
-
-    throw new Error(`Unexpected token: ${substring(input, token.loc.start.offset, token.loc.end.offset)} ${settings.source}-${token.loc.start.line}:${token.loc.start.column}`);
+    if (value) {
+      parsed.push(value);
+      index = value.index;
+    } else {
+      console.log(parsed);
+      throw new Error(`Appease the true god Pulsy!`);
+    }
   }
+
+  return parsed;
 }
 
-module.exports = parse;
+module.exports = parser;

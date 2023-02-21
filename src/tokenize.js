@@ -26,6 +26,8 @@ const tokenTypes = {
   EQUALS: 21,           // =
   STRING: 22,           //
   NUMBER: 23,           //
+  LESS_THAN: 24,        // <
+  GREATER_THAN: 25,     // >
 };
 
 const punctuatorTokensMap = { // Lexeme: Token
@@ -40,7 +42,9 @@ const punctuatorTokensMap = { // Lexeme: Token
   '-': tokenTypes.DASH,
   ';': tokenTypes.SEMICOLON,
   ':': tokenTypes.COLON,
-  '=': tokenTypes.EQUALS
+  '=': tokenTypes.EQUALS,
+  '<': tokenTypes.LESS_THAN,
+  '>': tokenTypes.GREATER_THAN,
 };
 
 const keywordTokensMap = { // Lexeme: Token
@@ -175,11 +179,12 @@ function parseString(input, index, line, column) {
   let state = stringStates._START_;
 
   while (index < input.length) {
-    const char = input.charAt(index) + input.charAt(index + 1);
+    const char = input.charAt(index);
+    const secondChar = input.charAt(index + 1);
 
     switch(state) {
       case stringStates._START_: {
-        if (char === '<<') {
+        if (char === '<' && secondChar === '<') {
           index = index + 2;
           state = stringStates.START_QUOTE_OR_CHAR;
         } else {
@@ -189,11 +194,11 @@ function parseString(input, index, line, column) {
       }
 
       case stringStates.START_QUOTE_OR_CHAR: {
-        if (char === '\\<' || char === '\\>') {
+        if (char === '\\') {
           buffer += char;
-          index = index + 2;
+          index = index + 1;
           state = stringStates.ESCAPE;
-        } else if (char === '>>') {
+        } else if (char === '>' && secondChar === '>') {
           index = index + 2;
           return {
             type: tokenTypes.STRING,
@@ -204,7 +209,7 @@ function parseString(input, index, line, column) {
           };
         } else {
           buffer += char;
-          index = index + 2;
+          index = index + 1;
         }
         break;
       }
@@ -372,9 +377,10 @@ const tokenize = (input, settings) => {
     }
 
     const matched = (
+      parseString(...args) || // Important to parse strings first
+                              // As string << is also a keyword
       parseChar(...args) ||
       parseKeyword(...args) ||
-      parseString(...args) ||
       parseNumber(...args)
     );
 
@@ -399,6 +405,7 @@ const tokenize = (input, settings) => {
       column = matched.column;
 
     } else {
+      console.log(tokens);
       throw new Error(`Unexpected Symbol: ${substring(input, index, index + 1)} - ${line} - ${column}`);
     }
   }
