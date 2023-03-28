@@ -9,7 +9,6 @@
     "pegjs": "npx pegjs -o ./lib/pon-parser.js ./lib/pon-parser.pegjs"
   },
   "dependencies": {
-    "grapheme-splitter": "^1.0.4",
     "pegjs": "^0.10.0"
   }
 }
