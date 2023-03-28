@@ -31,7 +31,7 @@ Take this quick example JSON:
 
 Here we can see how ugly JSON can be, no comment support, I never know which key is attached to which object without counting brackets, all around just an outdated, hard to read language.
 
-But the same in PON is simple, easy, and increadibly intutive!
+But the same in PON is simple, easy, and incredibly intutive!
 
 ```pon
 Dim core As Object
