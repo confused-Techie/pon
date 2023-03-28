@@ -6,7 +6,7 @@ Dim fontFamily As String
 Dim showInvisibles As Boolean
 Dim welcome As Object
 Dim showChangeLog As Boolean
-Dim showOnStartupLog As Boolean
+Dim showOnStartup As Boolean
 
 10 # <<core>> [
 <¿--<<This is a single line comment>>--?>

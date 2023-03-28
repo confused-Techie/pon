@@ -8,7 +8,13 @@
   "scripts": {
     "pegjs": "npx pegjs -o ./lib/pon-parser.js ./lib/pon-parser.pegjs"
   },
-  "dependencies": {
+  "bin": {
+    "pon": "bin/cli.js"
+  },
+  "devDependencies": {
     "pegjs": "^0.10.0"
+  },
+  "dependencies": {
+    "yargs": "^17.7.1"
   }
 }
