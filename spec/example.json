@@ -1,0 +1,14 @@
+{
+  "core": {
+    "projectHome": "/home/dae/pulsar",
+    "reopenProjectMenuCount": 20,
+    "editor": {
+      "fontFamily": "Cascadia Code, monospace",
+      "showInvisibles": true
+    },
+    "welcome": {
+      "showChangeLog": false,
+      "showOnStartup": true
+    }
+  }
+}

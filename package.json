@@ -1,4 +1,10 @@
 {
+  "name": "pon",
+  "version": "1.0.0",
+  "description": "Pulsar Object Notation",
+  "repository": "https://github.com/confused-Techie/pon",
+  "license": "MIT",
+  "main": "lib/pon.js",
   "scripts": {
     "pegjs": "npx pegjs -o ./lib/pon-parser.js ./lib/pon-parser.pegjs"
   },

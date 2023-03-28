@@ -1,12 +1,12 @@
 Dim core As Object
 Dim projectHome As String
-Dim reopenProjectMenuCount as Integer
+Dim reopenProjectMenuCount As Integer
 Dim editor As Object
 Dim fontFamily As String
 Dim showInvisibles As Boolean
 Dim welcome As Object
 Dim showChangeLog As Boolean
-Dim showChangeLog As Boolean
+Dim showOnStartupLog As Boolean
 
 10 # <<core>> [
 <¿--<<This is a single line comment>>--?>
