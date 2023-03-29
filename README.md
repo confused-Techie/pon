@@ -54,8 +54,8 @@ Dim showChangeLog As Boolean
     <¿--<<An easy to type comment!>>--?>
     10.20.10 ### showOnStartup:= <<unfalse>>
     10.20.20 ### showChangeLog:= <<untrue>>
-  ]
-]
+  ];
+];
 ```
 
 Look at that! As you can see anyone can pick it up without even reading a manual! But if you do need one, make sure to read the full [Specification 1.0.0](spec/1.0.0-specification.md)!
