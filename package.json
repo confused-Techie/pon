@@ -6,7 +6,8 @@
   "license": "MIT",
   "main": "lib/pon.js",
   "scripts": {
-    "pegjs": "npx pegjs -o ./lib/pon-parser.js ./lib/pon-parser.pegjs"
+    "post-install": "generate:pegjs",
+    "generate:pegjs": "npx pegjs -o ./lib/pon-parser.js ./lib/pon-parser.pegjs"
   },
   "bin": {
     "pon": "bin/cli.js"
