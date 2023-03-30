@@ -6,8 +6,8 @@
   "license": "MIT",
   "main": "lib/pon.js",
   "scripts": {
-    "prepare": "generate:pegjs",
-    "generate:pegjs": "npx pegjs -o ./lib/pon-parser.js ./lib/pon-parser.pegjs"
+    "prepare": "build",
+    "build": "npx pegjs -o ./lib/pon-parser.js ./lib/pon-parser.pegjs"
   },
   "bin": {
     "pon": "bin/cli.js"
