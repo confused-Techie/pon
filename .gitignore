@@ -1,4 +1,4 @@
 node_modules/
 test.js
 # This is the build output of running our build scripts
-lib/pon-parser.j
+lib/pon-parser.js

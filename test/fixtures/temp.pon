@@ -1,9 +1,0 @@
-Dim <<core>> As Object
-Dim <<editor>> As Object
-Dim <<fontFamily>> As String
-
-10 # <<core>> [
-<¿--<<This is a single line comment>>--?>
-     10.10 ## <<editor>> [
-          10.10.10 ### <<fontFamily>>:= <<Cascadia Code, monospace>>
-     ];
