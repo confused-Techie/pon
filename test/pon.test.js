@@ -16,6 +16,11 @@ describe("Reads Files Correctly", () => {
     expect(out).toMatchObject(fixtures.example_object.obj);
   });
 
+  test("Reads all comment chars", () => {
+    const out = pon.read(fixtures.comment_chars.pon);
+    expect(out).toMatchObject(fixtures.comment_chars.obj);
+  });
+
 });
 
 describe("Writes Files Correctly", () => {
@@ -32,6 +37,13 @@ describe("Writes Files Correctly", () => {
     let match = fixtures.example_object.pon
       .replace("<¿--<<This is a single line comment>>--?>\n", "")
       .replace("<¡--<<This is a multi\nline comment>>--!>\n", "");
+    expect(out).toMatch(match);
+  });
+
+  test("Writes all comment chars", () => {
+    const out = pon.write(fixtures.comment_chars.obj);
+    let match = fixtures.comment_chars.pon
+      .replace("<¿--<<Comment with > in it>>--?>\n", "");
     expect(out).toMatch(match);
   });
 

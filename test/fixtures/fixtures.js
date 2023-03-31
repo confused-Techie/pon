@@ -56,7 +56,19 @@ line comment>>--!>
   }
 };
 
+const comment_chars = {
+  pon:
+`Dim core As String
+
+<¿--<<Comment with > in it>>--?>
+10 # core:= <<A string>>`,
+  obj: {
+    core: "A string"
+  },
+};
+
 module.exports = {
   flat_object,
   example_object,
+  comment_chars,
 };
