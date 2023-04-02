@@ -5,8 +5,8 @@ const flat_object = {
 `Dim core As Integer
 Dim projectHome As String
 
-10 # core:= <<20>>
-20 # projectHome:= <</home/>>`,
+10 # core := <<20>>
+20 # projectHome := <</home/>>`,
   obj: {
     core: 20,
     projectHome: "/home/"
@@ -27,17 +27,17 @@ Dim showOnStartup As Boolean
 
 10 # <<core>> [
 <¿--<<This is a single line comment>>--?>
-  10.10 ## projectHome:= <</home/dae/pulsar>>
-  10.20 ## reopenProjectMenuCount:= <<20>>
+  10.10 ## projectHome := <</home/dae/pulsar>>
+  10.20 ## reopenProjectMenuCount := <<20>>
   10.30 ## <<editor>> [
-    10.30.10 ### fontFamily:= <<Cascadia Code, monospace>>
-    10.30.20 ### showInvisibles:= <<unfalse>>
+    10.30.10 ### fontFamily := <<Cascadia Code, monospace>>
+    10.30.20 ### showInvisibles := <<unfalse>>
   ];
 <¡--<<This is a multi
 line comment>>--!>
   10.40 ## <<welcome>> [
-    10.40.10 ### showChangeLog:= <<untrue>>
-    10.40.20 ### showOnStartup:= <<unfalse>>
+    10.40.10 ### showChangeLog := <<untrue>>
+    10.40.20 ### showOnStartup := <<unfalse>>
   ];
 ];`,
   obj: {
@@ -61,7 +61,7 @@ const comment_chars = {
 `Dim core As String
 
 <¿--<<Comment with > in it>>--?>
-10 # core:= <<A string>>`,
+10 # core := <<A string>>`,
   obj: {
     core: "A string"
   },
