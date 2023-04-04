@@ -25,20 +25,20 @@ Dim core.welcome As Object
 Dim core.welcome.showChangeLog As Boolean
 Dim core.welcome.showOnStartup As Boolean
 
-10 # <<core>> [
+10 # core [
 <¿--<<This is a single line comment>>--?>
-  10.10 ## projectHome := <</home/dae/pulsar>>
-  10.20 ## reopenProjectMenuCount := <<20>>
-  10.30 ## <<editor>> [
-    10.30.10 ### fontFamily := <<Cascadia Code, monospace>>
-    10.30.20 ### showInvisibles := <<unfalse>>
-  ];
+\t   10.10 ## projectHome := <</home/dae/pulsar>>
+\t   10.20 ## reopenProjectMenuCount := <<20>>
+\t   10.30 ## editor [
+\t   \t   10.30.10 ### fontFamily := <<Cascadia Code, monospace>>
+\t   \t   10.30.20 ### showInvisibles := <<unfalse>>
+\t   ];
 <¡--<<This is a multi
 line comment>>--!>
-  10.40 ## <<welcome>> [
-    10.40.10 ### showChangeLog := <<untrue>>
-    10.40.20 ### showOnStartup := <<unfalse>>
-  ];
+\t   10.40 ## welcome [
+\t   \t   10.40.10 ### showChangeLog := <<untrue>>
+\t   \t   10.40.20 ### showOnStartup := <<unfalse>>
+\t   ];
 ];`,
   obj: {
     core: {
