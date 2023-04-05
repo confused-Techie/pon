@@ -3,6 +3,8 @@
 > Syntax created by [@Daeraxa](https://github.com/Daeraxa)
 >
 > Code written by [@confused-Techie](https://github.com/confused-Techie)
+>
+> Overhauled by [@Sertonix](https://github.com/Sertonix)
 
 Here lies PON, the solution to the problem of what file types to support.
 
