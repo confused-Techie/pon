@@ -1,6 +1,8 @@
 // Simple dumb way to manager in memory fixtures
 
 const flat_object = {
+  _type: "Flat Object",
+  _comments: null,
   pon:
 `Dim core As Integer
 Dim projectHome As String
@@ -14,6 +16,11 @@ Dim projectHome As String
 };
 
 const example_object = {
+  _type: "Example Object",
+  _comments: [
+    "<¿--<<This is a single line comment>>--?>\n",
+    "<¡--<<This is a multi\nline comment>>--!>\n"
+  ],
   pon:
 `Dim core As Object
 Dim core.projectHome As String
@@ -57,6 +64,10 @@ line comment>>--!>
 };
 
 const comment_chars = {
+  _type: "All comment chars",
+  _comments: [
+    "<¿--<<Comment with > in it>>--?>\n"
+  ],
   pon:
 `Dim core As String
 

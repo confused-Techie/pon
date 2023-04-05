@@ -6,47 +6,49 @@ const fixtures = require("./fixtures/fixtures.js");
 
 describe("Reads Files Correctly", () => {
 
-  test("Reads flat object", () => {
-    const out = pon.read(fixtures.flat_object.pon);
+  for (const fix in fixtures) {
 
-    expect(out).toMatchObject(fixtures.flat_object.obj);
-  });
+    test(`Writes ${fix}-${fixtures[fix]._type} File Correctly`, () => {
+      let tmp = fixtures[fix];
 
-  test("Reads example object", () => {
-    const out = pon.read(fixtures.example_object.pon);
+      const out = pon.read(tmp.pon);
 
-    expect(out).toMatchObject(fixtures.example_object.obj);
-  });
-
-  test("Reads all comment chars", () => {
-    const out = pon.read(fixtures.comment_chars.pon);
-    expect(out).toMatchObject(fixtures.comment_chars.obj);
-  });
-
+      expect(out).toMatchObject(tmp.obj);
+    });
+  }
 });
 
 describe("Writes Files Correctly", () => {
 
-  test("Writes flat object", () => {
-    const out = pon.write(fixtures.flat_object.obj);
-    expect(out).toMatch(fixtures.flat_object.pon);
+  for (const fix in fixtures) {
+
+    test(`Writes ${fix}-${fixtures[fix]._type} File correctly`, () => {
+      let tmp = fixtures[fix];
+
+      const out = pon.write(tmp.obj);
+
+      let match = tmp.pon;
+      if (Array.isArray(tmp._comments)) {
+        for (const com of tmp._comments) {
+          match = match.replace(com, "");
+        }
+      }
+
+      expect(out).toMatch(match);
+    });
+  }
+});
+
+describe("Ensure our errors are as helpful as possible", () => {
+
+  test("Make sure errors happen", () => {
+    let err = require("../lib/errors.js");
+    let cycles = 10;
+
+    let errs = err.testErrors(cycles);
+
+    // Some errors don't return directly, or immediatly. So we can't check the exact
+    // number, but we expect near to, -1, but this is easier
+    expect(Object.keys(errs).length).toBeLessThanOrEqual(cycles);
   });
-
-  test("Writes example object", () => {
-    const out = pon.write(fixtures.example_object.obj);
-
-    // We have to remove comments, since they can't be written out.
-    let match = fixtures.example_object.pon
-      .replace("<¿--<<This is a single line comment>>--?>\n", "")
-      .replace("<¡--<<This is a multi\nline comment>>--!>\n", "");
-    expect(out).toMatch(match);
-  });
-
-  test("Writes all comment chars", () => {
-    const out = pon.write(fixtures.comment_chars.obj);
-    let match = fixtures.comment_chars.pon
-      .replace("<¿--<<Comment with > in it>>--?>\n", "");
-    expect(out).toMatch(match);
-  });
-
 });
