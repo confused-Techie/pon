@@ -15,7 +15,7 @@ Dim projectHome As String
 
 const example_object = {
   pon:
-`Dim core As Object
+`Dim core As Object-
 Dim core.projectHome As String
 Dim core.reopenProjectMenuCount As Integer
 Dim core.editor As Object
