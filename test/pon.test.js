@@ -1,4 +1,4 @@
-// Enable usefull error messages
+// Enable useful error messages
 require("../lib/errors.js").wrap = f => f;
 
 const pon = require("../lib/pon.js");
