@@ -49,11 +49,11 @@ Dim showOnStartup As Boolean
 Dim showChangeLog As Boolean
 
 10 # <<core>> [
-  10.10 ## projectHome:= <</home/dae/pulsar>>
+  10.10 ## projectHome := <</home/dae/pulsar>>
   10.20 ## <<welcome>> [
     <¿--<<An easy to type comment!>>--?>
-    10.20.10 ### showOnStartup:= <<unfalse>>
-    10.20.20 ### showChangeLog:= <<untrue>>
+    10.20.10 ### showOnStartup := <<unfalse>>
+    10.20.20 ### showChangeLog := <<untrue>>
   ];
 ];
 ```

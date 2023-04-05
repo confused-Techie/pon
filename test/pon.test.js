@@ -1,6 +1,8 @@
+// Enable useful error messages
+require("../lib/errors.js").wrap = f => f;
+
 const pon = require("../lib/pon.js");
 const fixtures = require("./fixtures/fixtures.js");
-const fs = require("fs");
 
 describe("Reads Files Correctly", () => {
 

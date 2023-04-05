@@ -1,24 +1,41 @@
 #!/usr/bin/env node
 
 const pon = require("../lib/pon.js");
-const fs = require("fs");
-const path = require("path");
+const fs = require("fs/promises");
 
-const argv = require("yargs/yargs")(process.argv.slice(2))
+async function input(argv) {
+  if (argv.input) {
+    return await fs.readFile(argv.input, { encoding: "utf8" });
+  } else {
+    return await new Promise( resolve => {
+      let data = "";
+      process.stdin.on("data", chunk => data += chunk );
+      process.stdin.on("end", () => resolve(data));
+    });
+  }
+}
+
+async function output(argv, data) {
+  if (argv.output) {
+    await fs.writeFile(argv.output, data);
+  } else {
+    console.log(data);
+  }
+}
+
+require("yargs/yargs")(process.argv.slice(2))
 .usage("Usage: $0 <command> [options]")
-.command(
-  "pon",
-  "Read or Write Pulsar Object Notation Files"
-)
-.option("r", {
-  alias: "read",
-  description: "Read a PON file.",
-  type: "boolean"
+.command({
+  command: "read",
+  aliases: ["r"],
+  desc: "Read a PON file.",
+  async handler(argv) { await output(argv, JSON.stringify(pon.read(await input(argv)))) }
 })
-.option("w", {
-  alias: "write",
-  description: "Write a PON file.",
-  type: "boolean"
+.command({
+  command: "write",
+  aliases: ["w"],
+  desc: "Write a PON file.",
+  async handler(argv) { await output(argv, pon.write(JSON.parse(await input(argv)))) }
 })
 .option("i", {
   alias: "input",
@@ -30,57 +47,5 @@ const argv = require("yargs/yargs")(process.argv.slice(2))
   description: "Output File.",
   type: "string"
 })
-.options("t", {
-  alias: "time",
-  description: "Output how long the request takes.",
-  type: "boolean"
-})
-.options("raw", {
-  description: "Pass raw values via the CLI rather, than providing a path to a file.",
-  type: "boolean"
-}).argv;
-
-let returnData = false;
-let start = performance.now();
-
-if (argv.write) {
-  if (argv.raw) {
-    returnData = pon.write(argv.input);
-  } else if (argv.input) {
-    returnData = pon.write(path.resolve(argv.input), { path: true });
-  }
-
-} else if (argv.read) {
-
-  if (argv.raw) {
-    returnData = pon.read(argv.input);
-  } else if (argv.input) {
-    returnData = pon.read(path.resolve(argv.input), { path: true });
-  }
-} else {
-  throw new Error("Unknown operation requested.");
-}
-
-if (typeof argv.output === "string") {
-  if (!returnData) {
-    throw new Error("Unable to process command");
-  }
-
-  fs.writeFileSync(path.resolve(argv.output), returnData);
-
-  if (argv.time) {
-    console.log(`Total Time: ${performance.now() - start}ms`);
-  }
-  process.exit(0);
-
-} else {
-  if (!returnData) {
-    // Return data never got set.
-    throw new Error("Unable to process command.");
-  }
-  if (argv.time) {
-    console.log(`Total Time: ${performance.now() - start}ms`);
-  }
-  console.log(returnData);
-  process.exit(0);
-}
+.strict()
+.demandCommand(1).parse();
