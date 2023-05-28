@@ -45,10 +45,10 @@ But the same in PON is simple, easy, and incredibly intuitive!
 
 ```pon
 Dim core As Object
-Dim projectHome As String
-Dim welcome As Object
-Dim showOnStartup As Boolean
-Dim showChangeLog As Boolean
+Dim core.projectHome As String
+Dim core.welcome As Object
+Dim core.welcome.showOnStartup As Boolean
+Dim core.welcome.showChangeLog As Boolean
 
 10 # <<core>> [
   10.10 ## projectHome := <</home/dae/pulsar>>
