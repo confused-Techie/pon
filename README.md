@@ -12,7 +12,7 @@ Here lies PON, the solution to the problem of what file types to support.
 * Read the CLI [Docs](#cli-docs)
 * Get the Pulsar [`language-pon`](https://github.com/confused-Techie/language-pon) package.
 
-One day during discussions amoung the Pulsar dev team, we came to the topic of what file types to support for users config files. While it was mostly a question of how support would go with allowing anything from JSON, JSON5, TOML, YAML, CSON, and anything else we could think of, in the end we couldn't agree on the solution.
+One day during discussions among the Pulsar dev team, we came to the topic of what file types to support for users config files. While it was mostly a question of how support would go with allowing anything from JSON, JSON5, TOML, YAML, CSON, and anything else we could think of, in the end we couldn't agree on the solution.
 
 So with that, we all could decide on PON!
 
@@ -21,7 +21,7 @@ Pulsar Object Notation has the best of all worlds!
 * Easy to determine the types of keys
 * Human Readable object structure
 * Incredibly clear object nesting
-* Comments & Multiline Comments are supported!
+* Single & multiline Comments are supported!
 
 PON is easy to learn, and easy to use!
 
@@ -41,7 +41,7 @@ Take this quick example JSON:
 
 Here we can see how ugly JSON can be, no comment support, I never know which key is attached to which object without counting brackets, all around just an outdated, hard to read language.
 
-But the same in PON is simple, easy, and incredibly intutive!
+But the same in PON is simple, easy, and incredibly intuitive!
 
 ```pon
 Dim core As Object
